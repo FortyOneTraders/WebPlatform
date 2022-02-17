@@ -4,8 +4,6 @@ export default async (req, res) => {
   const movies = await db
     .collection("gtest")
     .find({})
-    .sort({ metacritic: -1 })
-    .limit(20)
     .toArray();
   res.json(movies);
 };

@@ -12,3 +12,9 @@ Then, go into the directory, and run ```npm install```
 Then, run ```npm run dev```.
 
 Navigate to localhost:3000 in your browser, and you should see it running.
+## Env Variables 
+
+Make sure to add a .env.local file with the appropriate env variables 
+current required varaibles are: 
+1. MONGODB_URI
+2. MONGODB_DB
