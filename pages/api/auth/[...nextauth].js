@@ -1,6 +1,7 @@
 import NextAuth from "next-auth";
-// import Providers from "next-auth/providers";
 import GoogleProvider from "next-auth/providers/google";
+import {addNewUser,getUserFromEmail} from "../../../util/mongo/mongoUsers"; 
+
 
 export default NextAuth({
   // Configure one or more authentication providers
@@ -10,15 +11,18 @@ export default NextAuth({
       clientSecret: process.env.GOOGLE_SECRET,
     }),
   ],
-
-  database: process.env.MONGODB_URI,
   callbacks: {
-    session: async (session, user) => {
-        console.log("ran");
-        console.log(user);  
-      session.id = user.id;
-      return Promise.resolve(session);
+    async jwt({token}) {
+      addNewUser(token.email,token.name,token.picture); // this adds new user if not there 
+      return token;
+    },
+    async session({session}) {
+      if(session.user && !session.user._id){ // puts in user object from database instead of token 
+        const user = await getUserFromEmail(session.user.email);
+        session.user = user; 
+      }
+      return session; 
     },
   },
-//   secret: process.env.JWT_SECRET, 
+  secret: process.env.SECRET,    
 });

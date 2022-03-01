@@ -1,10 +1,11 @@
-import UserLoginOrIndicator from "../components/UserLoginOrIndicator"; 
+import SignInOrOut from "../components/SignInOrOut"; 
+import Link from "next/link"; 
 
 export default () => {
   return (
     <div>
       <h1>Hello and welcome to the boilerplate for NextJS.</h1>
-      <UserLoginOrIndicator /> 
+      <SignInOrOut /> 
       <hr />
       <h3>Pages</h3>
       <p>To create a page, add a folder in the pages directory that is named after the page you are making.</p>
@@ -18,6 +19,9 @@ export default () => {
       <p>To create a React component, add a folder with the name of the component in the components directory.</p>
       <p>Its pretty much the same as a normal React app.</p>
       <hr />
+      <Link href="/test">
+        <a>Test Page</a>
+      </Link>
     </div>
   )
 }
