@@ -1,4 +1,4 @@
-import {connectToDatabase} from "./mongodb"; 
+import {connectToDatabase} from "../mongodb.js"; 
 
 // takes a _id = transactionID (if false it will be generated), amount, and assosicated email and adds it to the database
 // returns true on sucess and false on failure 
@@ -13,5 +13,8 @@ export const addDonationToDB = async (amount, email, _id=false)=>{
 
 export const getDonationFromUserEmail = async email=>{
     const { db } = await connectToDatabase();
-    return (await db.collection("donations").find({email}).toArray()).map(({email,amount})=>({email,amount})); 
+    return (await db.collection("donations").find({email}).toArray())
+    .map(({email,amount, _id})=>(
+        {email,amount, _id: typeof _id === "object" ? _id.toHexString() : _id}
+    )); 
 }

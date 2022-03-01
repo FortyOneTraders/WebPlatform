@@ -3,7 +3,7 @@
     @Zach. This is simply an example on how to use the DB module written
 */
 
-import {addDonationToDB} from "../../util/mongohelper"; 
+import {addDonationToDB} from "../../util/mongo/mongoTransactions/index.js"; 
 const sample_DB_endpoint = async (req,res)=>{
     if (req.method !== "POST"){
         res.status(405).send({message: "Invalid method type: must be POST"}); 

@@ -2,13 +2,13 @@
     This page is a sample and should be deleted when paypal is implemented
     @Zach. This is simply an example on how to use the DB module written
 */
-import {getDonationFromUserEmail} from "../../util/mongohelper"; 
+import {getDonationFromUserEmail} from "../../util/mongo/mongoTransactions/index.js"; 
 
 export default ({email, dons })=>{
     return (
         <div>
             {email}
-            {dons.map(({amount})=><li>{amount}</li>)}
+            {dons.map(({amount}, i)=><li key={i}>{amount}</li>)}
         </div>
     )
 }
@@ -16,7 +16,7 @@ export default ({email, dons })=>{
 
 export async function getStaticPaths() {
     return {
-        paths: [{params: {email: "put a valid email here"}}],
+        paths: [{params: {email: "gpress2222@gmail.com"}}],
         fallback: false
     }
 }
