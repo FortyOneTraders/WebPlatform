@@ -1,8 +1,9 @@
 import React from 'react';
+import styles from './NavBar.module.css';
 
 const Navbar = () => {
     return (
-        <div>
+        <div className={styles.navbar}>
             Home | About Us | Donate
         </div>
     )
