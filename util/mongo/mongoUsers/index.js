@@ -3,19 +3,12 @@ import {connectToDatabase} from "../mongodb.js";
 
 
 // adds new user to database if not there 
-// returns {added: true/false, user: user}
+// returns {added: true/false, user: {email,name,image, _id(might be undefined)}}
 export const addNewUser = async (email,name,image)=>{
 
     const {db} = await connectToDatabase();
-    let user = await db.collection("users").findOne({email}); 
-    let added = false; 
-    if (!user){
-        added = true;
-        const result = await db.collection("users").insertOne({email,name,image});
-        user = {email,name,image, _id: result.insertedId}; 
-    }
-    user._id = user._id.toHexString();
-    return {added, user};
+    const {upsertedCount: added, upsertedId: _id} = await db.collection("users").update({email}, {"$setOnInsert":{email,name,image}}, {upsert: true});  
+    return {added: added ? true: false, user: {email,name,image, _id: _id?.toHexString()}};   
 }
 
 
