@@ -1,7 +1,7 @@
 export default () => {
   return (
     <div>
-      <h1>Hello and welcome to the boilerplate for NextJS.</h1>
+      <h1>Hello and Welcome to Forty One Traders</h1>
       <hr />
       <h3>Pages</h3>
       <p>To create a page, add a folder in the pages directory that is named after the page you are making.</p>
